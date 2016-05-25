@@ -1,0 +1,111 @@
+# ImpEx for Importing Products
+
+# Macros / Replacement Parameter definitions
+$productCatalog=asianpaintsProductCatalog
+$productCatalogName=Asianpaints Product Catalog
+$catalogVersion=catalogversion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default=$productCatalog:Staged]
+$supercategories=supercategories(code, $catalogVersion)
+$baseProduct=baseProduct(code,$catalogVersion)
+$approved=approvalstatus(code)[default='approved']
+$taxGroup=Europe1PriceFactory_PTG(code)[default=eu-vat-full]
+
+# Insert Products
+#INSERT_UPDATE Product;code[unique=true];$supercategories;manufacturerName;manufacturerAID;unit(code);ean;variantType(code);$catalogVersion;$approved
+INSERT_UPDATE Product;code[unique=true];$catalogVersion;unit(code);$supercategories;variantType(code);$approved;$taxGroup;ean;manufacturerName
+;0001;;pieces;101, brand_1;AsianpaintsStyleVariantProduct;;;;asianpaints
+;0002;;pieces;101, brand_1;AsianpaintsStyleVariantProduct;;;;asianpaints
+;0003;;pieces;102, brand_1;;;;;asianpaints
+;0004;;pieces;102, brand_1;;;;;asianpaints
+;0005;;pieces;201, brand_2;;;;;asianpaints
+;0006;;pieces;201, brand_2;;;;;asianpaints
+;0007;;pieces;201, brand_2;;;;;asianpaints
+;0008;;pieces;202, brand_2;;;;;asianpaints
+;0009;;pieces;202, brand_2;;;;;asianpaints
+;0010;;pieces;301, brand_3;;;;;asianpaints
+;0011;;pieces;301, brand_3;;;;;asianpaints
+;0012;;pieces;301, brand_3;;;;;asianpaints
+
+#;0002;101, brand_1;Asianpaints;Asianpaints;pieces;
+#;0003;102, brand_1;Asianpaints;Asianpaints;pieces;
+#;0004;102, brand_1;Asianpaints;Asianpaints;pieces;
+#;0005;201, brand_2;Asianpaints;Asianpaints;pieces;
+#;0006;201, brand_2;Asianpaints;Asianpaints;pieces;
+#;0007;201, brand_2;Asianpaints;Asianpaints;pieces;
+#;0008;202, brand_2;Asianpaints;Asianpaints;pieces;
+#;0009;202, brand_2;Asianpaints;Asianpaints;pieces;
+#;0010;301, brand_3;Asianpaints;Asianpaints;pieces;
+#;0011;301, brand_3;Asianpaints;Asianpaints;pieces;
+#;0012;301, brand_3;Asianpaints;Asianpaints;pieces;
+
+
+#INSERT_UPDATE AsianpaintsColorVariantProduct;code[unique=true];$baseProduct;ean;unit(code);color;$supercategories;approvalstatus(code)[default='approved'];$catalogVersion
+
+# Create ApparelStyleVariantProduct variants
+INSERT_UPDATE AsianpaintsStyleVariantProduct;code[unique=true];$catalogVersion;$baseProduct;unit(code);swatchColors(code);supercategories(code,$catalogVersion);varianttype(code);$approved
+;B0001;;0001;pieces;BLUE;101;AsianpaintsSizeVariantProduct;
+;R0001;;0001;pieces;RED;101;AsianpaintsSizeVariantProduct;
+;G0001;;0001;pieces;GREEN;101;AsianpaintsSizeVariantProduct;
+
+;B0002;;0002;pieces;BLUE;101;AsianpaintsSizeVariantProduct;
+;R0002;;0002;pieces;RED;101;AsianpaintsSizeVariantProduct;
+;G0002;;0002;pieces;GREEN;101;AsianpaintsSizeVariantProduct;
+
+#;B0003;;0003;pieces;Blue;102;AsianpaintsSizeVariantProduct;
+#;R0003;;0003;pieces;Red;102;AsianpaintsSizeVariantProduct;
+#;G0003;;0003;pieces;Green;102;AsianpaintsSizeVariantProduct;
+
+#;B0004;;0004;pieces;Blue;102;AsianpaintsSizeVariantProduct;
+#;R0004;;0004;pieces;Red;102;AsianpaintsSizeVariantProduct;
+#;G0004;;0004;pieces;Green;102;AsianpaintsSizeVariantProduct;
+
+#;B0005;;0005;pieces;Blue;201;AsianpaintsSizeVariantProduct;
+#;R0005;;0005;pieces;Red;201;AsianpaintsSizeVariantProduct;
+#;G0005;;0005;pieces;Green;201;AsianpaintsSizeVariantProduct;
+
+#;B0006;;0006;pieces;Blue;201;AsianpaintsSizeVariantProduct;
+#;R0006;;0006;pieces;Red;201;AsianpaintsSizeVariantProduct;
+#;G0006;;0006;pieces;Green;201;AsianpaintsSizeVariantProduct;
+
+#;B0007;;0007;pieces;Blue;201;AsianpaintsSizeVariantProduct;
+#;R0007;;0007;pieces;Red;201;AsianpaintsSizeVariantProduct;
+#;G0007;;0007;pieces;Green;201;AsianpaintsSizeVariantProduct;
+
+#;B0008;;0008;pieces;Blue;202;AsianpaintsSizeVariantProduct;
+#;R0008;;0008;pieces;Red;202;AsianpaintsSizeVariantProduct;
+#;G0008;;0008;pieces;Green;202;AsianpaintsSizeVariantProduct;
+
+#;B0009;;0009;pieces;Blue;202;AsianpaintsSizeVariantProduct;
+#;R0009;;0009;pieces;Red;202;AsianpaintsSizeVariantProduct;
+#;G0009;;0009;pieces;Green;202;AsianpaintsSizeVariantProduct;
+
+#;B0010;;0010;pieces;Blue;301;AsianpaintsSizeVariantProduct;
+#;R0010;;0010;pieces;Red;301;AsianpaintsSizeVariantProduct;
+#;G0010;;0010;pieces;Green;301;AsianpaintsSizeVariantProduct;
+
+#;B0011;;0011;pieces;Blue;301;AsianpaintsSizeVariantProduct;
+#;R0011;;0011;pieces;Red;301;AsianpaintsSizeVariantProduct;
+#;G0011;;0011;pieces;Green;301;AsianpaintsSizeVariantProduct;
+
+#;B0012;;0012;pieces;Blue;301;AsianpaintsSizeVariantProduct;
+#;R0012;;0012;pieces;Red;301;AsianpaintsSizeVariantProduct;
+#;G0012;;0012;pieces;Green;301;AsianpaintsSizeVariantProduct;
+
+# Create ApparelSizeVariantProduct variants
+#INSERT_UPDATE AsianpaintsSizeVariantProduct;code[unique=true];$catalogVersion;$baseProduct;supercategories(code,$catalogVersion);unit(code)[defaul='pieces'];$approved;$taxGroup;manufacturerName
+#;B0001_M;;B0001;101;pieces;;;;Blue;asianpaints
+
+INSERT_UPDATE AsianpaintsSizeVariantProduct;code[unique=true];$catalogVersion;$baseProduct;ean;unit(code);swatchColors(code);supercategories(code,$catalogVersion);;$approved;$taxGroup;manufacturerName
+;B0001_M;;B0001;;pieces;BLUE;101;;;;;asianpaints
+;B0001_L;;B0001;;pieces;BLUE;101;;;;;asianpaints
+;R0001_M;;R0001;;pieces;RED;101;;;;;asianpaints
+;R0001_L;;R0001;;pieces;RED;101;;;;;asianpaints
+;G0001_M;;G0001;;pieces;GREEN;101;;;;;asianpaints
+;G0001_L;;G0001;;pieces;GREEN;101;;;;;asianpaints
+
+;B0002_M;;B0002;;pieces;BLUE;101;;;;;asianpaints
+;B0002_L;;B0002;;pieces;BLUE;101;;;;;asianpaints
+;R0002_M;;R0002;;pieces;RED;101;;;;;asianpaints
+;R0002_L;;R0002;;pieces;RED;101;;;;;asianpaints
+;G0002_M;;G0002;;pieces;GREEN;101;;;;;asianpaints
+;G0002_L;;G0002;;pieces;GREEN;101;;;;;asianpaints
+
